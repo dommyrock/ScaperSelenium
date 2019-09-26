@@ -8,6 +8,7 @@ namespace ScriptTester
     {
         private int ticks = 0;
 
+        //This scraper uses less strict regex ,and appends sections to domain instead(initialy ment for targeting single domain)
         public Form1()
         {
             InitializeComponent();
@@ -29,10 +30,10 @@ namespace ScriptTester
             //runSearch.CrawlUrl();
             //this.timerElapsed.Stop();
 
-            //TODO
-            //this calls RunSerarch in it's class
             WebBrowser browser = new WebBrowser(textBoxInputUrl.Text);
             browser.BrowseSite();
+
+            browser.Dispose();
         }
 
         private void timerElapsed_Tick(object sender, EventArgs e)

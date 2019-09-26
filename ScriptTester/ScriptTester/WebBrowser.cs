@@ -17,27 +17,25 @@ namespace ScriptTester
         private IWebDriver WebDriver;
 
         private ChromeDriverService ChromeDriverService;
+        public int VslidLinksParsed { get; set; }
 
-        //public WebBrowser()
-        //{
-        //}
-
-        public WebBrowser(string input) : base(input)
+        public WebBrowser(string input) : base(input) //need to pass input params to both ,because their constructors demand it !
         {
             this.RunSearchContext = new RunSearch(input);
             this.RunSearchContext.InputUrl = input;
             this.RunSearchContext.InputUrls = base.InputUrls;
             this.RunSearchContext.CheckedUrlsDictionary = base.CheckedUrlsDictionary;
 
-            //this.InputUrl = input;
-            //this.InputUrls = base.InputUrls;
-            //this.CheckedUrlsDictionary = base.CheckedUrlsDictionary;
-
             this.ChromeDriverService = ChromeDriverService.CreateDefaultService();
             //this.ChromeDriverService.HideCommandPromptWindow = true;
 
             if (!this.ChromeDriverService.IsRunning)
             {
+                this.ChromeDriverService.Start();
+            }
+            else
+            {
+                Dispose();
                 this.ChromeDriverService.Start();
             }
 

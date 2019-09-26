@@ -14,7 +14,7 @@ namespace ScriptTester
     {
         public bool IsActive { get; set; } = true;
 
-        public int CurrentUrlIndex { get; set; } = 0;
+        public int CurrentUrlIndex { get; private set; } = 0;
 
         public string CurrentUrlString { get; set; }
 
@@ -30,8 +30,6 @@ namespace ScriptTester
 
         public RunSearch(string input)
         {
-            //this.RunSearchContext = new RunSearch(input); //so we can pass instance to childC
-
             this.InputUrl = input;
             this.InputUrls = new List<string>();
             this.CheckedUrlsDictionary = new Dictionary<string, CrawledURL>();
@@ -42,21 +40,18 @@ namespace ScriptTester
         {
             while (this.IsActive)
             {
-                string currentURL = this.InputUrls[this.CurrentUrlIndex];
-                this.CurrentUrlString = currentURL;
+                this.CurrentUrlString = this.InputUrls[this.CurrentUrlIndex];//could dirrectly replace currentURL with this.currenturlstring to simpliy...
 
-                if (ValidateUri(currentURL)) //calls Uri validation method
+                if (ValidateUri(this.CurrentUrlString)) //calls Uri validation method
                 {
-                    currentURL = this.CurrentUrlString;
-
-                    if (!this.CheckedUrlsDictionary.ContainsKey(currentURL))
+                    if (!this.CheckedUrlsDictionary.ContainsKey(this.CurrentUrlString))
                     {
                         try
                         {
-                            CrawledURL urlObject = new CrawledURL(currentURL, false);
-                            urlObject.Url = currentURL;
+                            CrawledURL urlObject = new CrawledURL(this.CurrentUrlString, false);
+                            urlObject.Url = this.CurrentUrlString;
 
-                            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(currentURL);
+                            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(this.CurrentUrlString);
                             request.ContentType = "text/html";
                             request.Accept = "txt/html";
                             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
@@ -170,7 +165,7 @@ namespace ScriptTester
             {
                 this.CurrentUrlString = this.InputUrl + uriString;
             }
-            //check only urls for inputed site ignore other ones
+            //check only sections of current domainv(can ignore for testing)
             if (this.CurrentUrlString.StartsWith(this.InputUrl))
             {
                 Uri absUr;
@@ -188,7 +183,7 @@ namespace ScriptTester
             return true;
         }
 
-        //Test with htmlParser -->htmlAgility library
+        //Test with htmlParser -->htmlAgility library (not used anywhere atm)
         private string hardCodeUrl = "https://www.24sata.hr/";
 
         private List<HtmlNode> nodes = new List<HtmlNode>();
