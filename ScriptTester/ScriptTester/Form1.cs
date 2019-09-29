@@ -24,17 +24,21 @@ namespace ScriptTester
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            //RunSearch runSearch = new RunSearch(textBoxInputUrl.Text);
-            ////runSearch.HtmlCrawl();
+            //WebBrowser browser = new WebBrowser(textBoxInputUrl.Text);
+            //browser.BrowseSite();
+            //browser.Dispose(); old code
 
-            //runSearch.CrawlUrl();
-            //this.timerElapsed.Stop();
+            RunSearch runSearch = new RunSearch(textBoxInputUrl.Text);
+            runSearch.CrawlUrl();
 
-            WebBrowser browser = new WebBrowser(textBoxInputUrl.Text);
-            browser.BrowseSite();
-
-            browser.Dispose();
+            this.timerElapsed.Stop();
         }
+
+        //private async void BrowseAsync()
+        //{
+        //    WebBrowser browser = new WebBrowser(textBoxInputUrl.Text);
+        //    await browser.BrowseSite(); //TODO : make BrowseSite() return [siteScreenshots]...on stop click
+        //}
 
         private void timerElapsed_Tick(object sender, EventArgs e)
         {
