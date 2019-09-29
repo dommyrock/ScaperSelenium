@@ -36,6 +36,9 @@
             this.labelDate = new System.Windows.Forms.Label();
             this.timerElapsed = new System.Windows.Forms.Timer(this.components);
             this.labelTimerElapsed = new System.Windows.Forms.Label();
+            this.buttonDispose = new System.Windows.Forms.Button();
+            this.labelDisposedStatus = new System.Windows.Forms.Label();
+            this.checkBoxDisposed = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnBrowse
@@ -50,7 +53,7 @@
             // 
             // textBoxInputUrl
             // 
-            this.textBoxInputUrl.Location = new System.Drawing.Point(127, 71);
+            this.textBoxInputUrl.Location = new System.Drawing.Point(96, 80);
             this.textBoxInputUrl.Name = "textBoxInputUrl";
             this.textBoxInputUrl.Size = new System.Drawing.Size(661, 20);
             this.textBoxInputUrl.TabIndex = 1;
@@ -59,7 +62,7 @@
             // labelInput
             // 
             this.labelInput.AutoSize = true;
-            this.labelInput.Location = new System.Drawing.Point(124, 55);
+            this.labelInput.Location = new System.Drawing.Point(93, 55);
             this.labelInput.Name = "labelInput";
             this.labelInput.Size = new System.Drawing.Size(29, 13);
             this.labelInput.TabIndex = 2;
@@ -92,11 +95,42 @@
             this.labelTimerElapsed.TabIndex = 4;
             this.labelTimerElapsed.Text = "Timer";
             // 
+            // buttonDispose
+            // 
+            this.buttonDispose.Location = new System.Drawing.Point(454, 115);
+            this.buttonDispose.Name = "buttonDispose";
+            this.buttonDispose.Size = new System.Drawing.Size(273, 54);
+            this.buttonDispose.TabIndex = 5;
+            this.buttonDispose.Text = "Dispose web Driver";
+            this.buttonDispose.UseVisualStyleBackColor = true;
+            this.buttonDispose.Click += new System.EventHandler(this.buttonDispose_Click);
+            // 
+            // labelDisposedStatus
+            // 
+            this.labelDisposedStatus.AutoSize = true;
+            this.labelDisposedStatus.Location = new System.Drawing.Point(451, 194);
+            this.labelDisposedStatus.Name = "labelDisposedStatus";
+            this.labelDisposedStatus.Size = new System.Drawing.Size(51, 13);
+            this.labelDisposedStatus.TabIndex = 6;
+            this.labelDisposedStatus.Text = "Disposed";
+            // 
+            // checkBoxDisposed
+            // 
+            this.checkBoxDisposed.AutoSize = true;
+            this.checkBoxDisposed.Location = new System.Drawing.Point(509, 194);
+            this.checkBoxDisposed.Name = "checkBoxDisposed";
+            this.checkBoxDisposed.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxDisposed.TabIndex = 7;
+            this.checkBoxDisposed.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.checkBoxDisposed);
+            this.Controls.Add(this.labelDisposedStatus);
+            this.Controls.Add(this.buttonDispose);
             this.Controls.Add(this.labelTimerElapsed);
             this.Controls.Add(this.labelDate);
             this.Controls.Add(this.labelInput);
@@ -118,6 +152,9 @@
         private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.Timer timerElapsed;
         private System.Windows.Forms.Label labelTimerElapsed;
+        private System.Windows.Forms.Button buttonDispose;
+        private System.Windows.Forms.Label labelDisposedStatus;
+        private System.Windows.Forms.CheckBox checkBoxDisposed;
     }
 }
 

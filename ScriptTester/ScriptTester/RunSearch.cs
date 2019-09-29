@@ -11,13 +11,11 @@ namespace ScriptTester
 {
     public class RunSearch : WebBrowser
     {
-        public bool IsActive { get; private set; } = true;
+        public bool IsActive { get; set; } = true;
         public string InputUrl { get; set; }
         private int CurrentUrlIndex { get; set; } = 0;
         private string CurrentUrlString { get; set; }
         private string Result { get; set; }
-
-        public RunSearch RunSearchContext { get; set; }
 
         public List<string> InputUrls;
 
@@ -25,7 +23,6 @@ namespace ScriptTester
 
         public List<Screenshot> TempFileStore { get; set; }
 
-        public WebBrowser webBrowser;
         public ChromeDriver C_Driver;
 
         public RunSearch(string input) : base(input)//pass inout to bas class constructor
@@ -181,6 +178,8 @@ namespace ScriptTester
                     throw ex;
                 }
             }
+            base.Close();
+            return;
         }
 
         #region RegexMethod
@@ -252,5 +251,20 @@ namespace ScriptTester
         }
 
         #endregion TestWithHtmlAgilityPackLib
+
+        //SAMPLE CODE
+        //        public ISet<string> GetNewLinks(string content)
+        //{
+        //    Regex regexLink = new Regex("(?<=<a\\s*?href=(?:'|\"))[^'\"]*?(?=(?:'|\"))");
+
+        //    ISet<string> newLinks = new HashSet<string>();
+        //    foreach (var match in regexLink.Matches(content))
+        //    {
+        //        if (!newLinks.Contains(match.ToString()))
+        //            newLinks.Add(match.ToString());
+        //    }
+
+        //    return newLinks;
+        //}
     }
 }

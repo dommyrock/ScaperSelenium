@@ -71,22 +71,24 @@ namespace ScriptTester
             screenshot.SaveAsFile(@"E:\Output\" + friendlyDatetime + ".png", ScreenshotImageFormat.Png);//Make sure local dir exists !!!
         }
 
-        public void Close()//TODO ... implement disposing ... this one doesnt work atm
+        public void Close()
         {
-            if (this.WebDriver != null)
+            if (this.CDriver != null)
             {
-                this.WebDriver.Close();
-                this.WebDriver.Quit();
-                this.WebDriver.Dispose();
-                this.WebDriver = null;
+                //CDriver.Close();
+                //CDriver.Dispose();
+                CDriver.Quit();
+                CDriver = null;
             }
 
             if (this.CDS != null)
             {
-                this.CDS.Dispose();
-                this.CDS = null;
+                CDS.Dispose();
+                CDS = null;
             }
         }
+
+        #region IWebDriverMethods
 
         public void Dispose()
         {
@@ -122,5 +124,7 @@ namespace ScriptTester
         {
             throw new NotImplementedException();
         }
+
+        #endregion IWebDriverMethods
     }
 }

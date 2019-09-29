@@ -7,28 +7,25 @@ namespace ScriptTester
     public partial class Form1 : Form
     {
         private int ticks = 0;
+        private RunSearch runSearch;
 
         //This scraper uses less strict regex ,and appends sections to domain instead(initialy ment for targeting single domain)
         public Form1()
         {
             InitializeComponent();
             this.labelDate.Text = DateTime.Now.ToLongDateString();
+            backgroundWorker1.WorkerSupportsCancellation = true; //needs a stop btn to stop thread/method
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            backgroundWorker1.RunWorkerAsync();
-            backgroundWorker1.WorkerSupportsCancellation = true; //needs a stop btn to stop thread/method
             this.timerElapsed.Start();
+            backgroundWorker1.RunWorkerAsync();
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            //WebBrowser browser = new WebBrowser(textBoxInputUrl.Text);
-            //browser.BrowseSite();
-            //browser.Dispose(); old code
-
-            RunSearch runSearch = new RunSearch(textBoxInputUrl.Text);
+            runSearch = new RunSearch(textBoxInputUrl.Text);
             runSearch.CrawlUrl();
 
             this.timerElapsed.Stop();
@@ -44,6 +41,15 @@ namespace ScriptTester
         {
             ticks++;
             this.labelTimerElapsed.Text = "Elapsed time : " + ticks.ToString() + " sec";
+        }
+
+        private void buttonDispose_Click(object sender, EventArgs e)
+        {
+            //Dispose webdriver
+            runSearch.IsActive = false;
+            checkBoxDisposed.Checked = true;
+            backgroundWorker1.CancelAsync();
+            backgroundWorker1.Dispose();
         }
     }
 }
